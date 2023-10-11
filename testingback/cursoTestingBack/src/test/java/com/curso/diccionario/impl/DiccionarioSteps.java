@@ -9,12 +9,14 @@ import io.cucumber.java.es.Entonces;
 import io.cucumber.java.es.Y;
 import org.junit.jupiter.api.Assertions;
 
+import java.util.List;
 import java.util.Optional;
 
 public class DiccionarioSteps {
     private SuministradorDeDiccionarios miSuministrador;
     private boolean respuesta;
     private Optional<Diccionario> diccionario;
+    private Optional<List<String>> significados;
 
     @Given("Que tenga un suministrador de diccionarios")
     public void queTengaUnSuministradorDeDiccionarios() {
@@ -67,38 +69,37 @@ public class DiccionarioSteps {
     }
 
     @Dado("que tengo un diccionario de idioma {string}")
-    public void queTengoUnDiccionarioDeIdioma(String arg0) {
+    public void queTengoUnDiccionarioDeIdioma(String idioma) {
+        diccionario = miSuministrador.getDiccionario(idioma);
     }
-
     @Cuando("pregunto por la palabra {string}")
-    public void preguntoPorLaPalabra(String arg0) {
+    public void preguntoPorLaPalabra(String palabra) {
+        respuesta = diccionario.get().existe(palabra);
     }
-
     @Entonces("me responde que si existe")
     public void meRespondeQueSiExiste() {
+        Assertions.assertTrue(respuesta);
     }
-
     @Entonces("me responde que no existe")
     public void meRespondeQueNoExiste() {
+        Assertions.assertFalse(respuesta);
     }
-
     @Cuando("solicito los significados de la palabra {string}")
-    public void solicitoLosSignificadosDeLaPalabra(String arg0) {
+    public void solicitoLosSignificadosDeLaPalabra(String palabra) {
+        significados = diccionario.get().getSignificados(palabra);
     }
-
     @Entonces("me devuelve {int} significado")
-    public void meDevuelveSignificado(int arg0) {
-    }
-
-    @Y("el significado número {int} es {string}")
-    public void elSignificadoNúmeroEs(int arg0, String arg1) {
-    }
-
     @Entonces("me devuelve {int} significados")
-    public void meDevuelveSignificados(int arg0) {
+    public void meDevuelveSignificado(int numero) {
+        Assertions.assertTrue(significados.isPresent());
+        Assertions.assertEquals(numero, significados.get().size());
     }
-
+    @Y("el significado número {int} es {string}")
+    public void elSignificadoNúmeroEs(int posicion, String significado) {
+        Assertions.assertEquals(significado, significados.get().get(posicion - 1));
+    }
     @Entonces("no me devuelve nada")
     public void noMeDevuelveNada() {
+        Assertions.assertFalse(significados.isPresent());
     }
 }
