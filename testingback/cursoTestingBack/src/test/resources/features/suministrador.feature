@@ -21,15 +21,15 @@ Característica: Suministrador de Diccionarios desde ficheros
   Escenario:    Recuperar un diccionario que exista
     Dado        Que tenga un suministrador de diccionarios
     Y           que el suministrador de diccionario tiene un diccionario para idioma "ES"
-    Cuando      solitito al suministrador un diccionario del idioma "ES"
+    Cuando      solicito al suministrador un diccionario del idioma "ES"
     Entonces    me devuelve un diccionario
     Y           ese diccionario debe ser un diccionario de idioma "ES"
 
   Escenario:    Recuperar un diccionario que no exista
     Dado        Que tenga un suministrador de diccionarios
     Y           que el suministrador de diccionario no tiene un diccionario para idioma "DE LOS ELFOS"
-    Cuando      solitito al suministrador un diccionario del idioma "DE LOS ELFOS"
-    Entonces    no me devuelve nada.
+    Cuando      solicito al suministrador un diccionario del idioma "DE LOS ELFOS"
+    Entonces    no me devuelve ningún diccionario.
 
     # Lo que pruebo aquí es el API: SISTEMA
   # Si yo tengo en cuenta que mi implementación va a connectarse con una BBDD
