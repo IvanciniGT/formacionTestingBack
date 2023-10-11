@@ -30,3 +30,7 @@ Característica: Suministrador de Diccionarios desde ficheros
     Y           que el suministrador de diccionario no tiene un diccionario para idioma "DE LOS ELFOS"
     Cuando      solitito al suministrador un diccionario del idioma "DE LOS ELFOS"
     Entonces    no me devuelve nada.
+
+    # Lo que pruebo aquí es el API: SISTEMA
+  # Si yo tengo en cuenta que mi implementación va a connectarse con una BBDD
+  # Y hago una prueba aislando a mi implementación de la BBDD ... será unitaria
