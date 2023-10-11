@@ -2,16 +2,20 @@ package com.curso.diccionario.impl;
 
 import com.curso.diccionario.Diccionario;
 import com.curso.diccionario.SuministradorDeDiccionarios;
-import org.junit.Test;
 
 import java.util.Optional;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+//import org.junit.Test;
+//import static org.junit.Assert.*;
 
-public class SuministradorDeDiccionarioTest {
+class SuministradorDeDiccionarioTest {
 
     @Test
-    public void preguntarPorDiccionarioQueExiste(){
+    @DisplayName("Preguntar por un diccionario que existe")
+    void preguntarPorDiccionarioQueExiste(){
         // Dado que tengo un suministrador
         SuministradorDeDiccionarios suministradorDeDiccionarios = new SuministradorDeDiccionariosImpl();
         // Y Que tenga idioma ES... Ya he creado un fichero según debe funcionar la implementación
@@ -21,7 +25,8 @@ public class SuministradorDeDiccionarioTest {
         assertTrue(respuesta);
     }
     @Test
-    public void preguntarPorDiccionarioQueNoExiste(){
+    @DisplayName("Preguntar por un diccionario que no existe")
+    void preguntarPorDiccionarioQueNoExiste(){
         // Dado que tengo un suministrador
         SuministradorDeDiccionarios suministradorDeDiccionarios = new SuministradorDeDiccionariosImpl();
         // Y           que el suministrador de diccionario no tiene un diccionario para idioma "DE LOS ELFOS"
@@ -32,7 +37,8 @@ public class SuministradorDeDiccionarioTest {
     }
 
     @Test
-    public void solicitarUnDiccionarioQueExiste(){
+    @DisplayName("Solicitar un diccionario que existe")
+    void solicitarUnDiccionarioQueExiste(){
         // Dado que tengo un suministrador
         SuministradorDeDiccionarios suministradorDeDiccionarios = new SuministradorDeDiccionariosImpl();
         // Y Que tenga idioma ES... Ya he creado un fichero según debe funcionar la implementación
@@ -44,7 +50,8 @@ public class SuministradorDeDiccionarioTest {
         assertEquals("ES", diccionario.get().getIdioma());
     }
     @Test
-    public void solicitarUnDiccionarioQueNoExiste(){
+    @DisplayName("Solicitar un diccionario que no existe")
+    void solicitarUnDiccionarioQueNoExiste(){
         // Dado que tengo un suministrador
         SuministradorDeDiccionarios suministradorDeDiccionarios = new SuministradorDeDiccionariosImpl();
         // Y Que tenga idioma ES... Ya he creado un fichero según debe funcionar la implementación

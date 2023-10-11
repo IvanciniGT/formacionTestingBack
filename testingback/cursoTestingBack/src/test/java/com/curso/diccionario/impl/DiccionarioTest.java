@@ -1,28 +1,36 @@
 package com.curso.diccionario.impl;
 
 import com.curso.diccionario.Diccionario;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.*;
+//import org.junit.BeforeClass;
+//import org.junit.Test;
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class DiccionarioTest {
+//import static org.junit.Assert.*;
+
+class DiccionarioTest {
 
     private static Diccionario diccionario;
     // Escenario: Preguntar por una palabra que existe
-    @BeforeClass // Antes de hacer todas las pruebas... ejecuta este código
-    public static void cargarDiccionario(){
+    //@BeforeClass // Antes de hacer todas las pruebas... ejecuta este código           JUNIT4
+    @BeforeAll  // Igual que BeforeClass... pero en JUNIT5
+    static void cargarDiccionario(){
         DiccionarioTest.diccionario = new SuministradorDeDiccionariosImpl().getDiccionario("ES").get();
     }
-    //@AfterClass // Después de hacer todas las pruebas... ejecuta este código
-    //@Before     // Antes de CADA prueba... ejecuta este código
-    //@After      // Después de CADA prueba... ejecuta este código
+    //@AfterClass // Después de hacer todas las pruebas... ejecuta este código          JUNIT4
+    //@AfterAll
+    //@Before     // Antes de CADA prueba... ejecuta este código                        JUNIT4
+    //@After      // Después de CADA prueba... ejecuta este código                      JUNIT4
+    //@BeforeEach                                                                       JUNIT5
+    //@AfterEach                                                                        JUNIT5
 
     @Test
-    public void preguntarPorPalabraQueExiste() {
+    @DisplayName("Preguntar por una palabra que existe")
+    void preguntarPorPalabraQueExiste() {
         // Dado     que tengo un diccionario de idioma "ES"
         // Cuando   pregunto por la palabra "manzana"
         boolean respuesta = diccionario.existe("manzana");
@@ -31,8 +39,9 @@ public class DiccionarioTest {
     }
 
     @Test
+    @DisplayName("Preguntar por una palabra que existe")
     // Escenario: Preguntar por una palabra que no existe
-    public void preguntarPorPalabraQueNoExiste() {
+    void preguntarPorPalabraQueNoExiste() {
         // Dado     que tengo un diccionario de idioma "ES"
         // Cuando   pregunto por la palabra "archilococo"
         boolean respuesta = diccionario.existe("archilococo");
@@ -41,8 +50,9 @@ public class DiccionarioTest {
     }
 
     @Test
+    @DisplayName("Recuperar los significados de una palabra que existe")
     // Escenario: Recuperar los significados de una palabra que existe
-    public void significadosDeUnaPalabraQueExisteConUnSignificado() {
+    void significadosDeUnaPalabraQueExisteConUnSignificado() {
         // Dado     que tengo un diccionario de idioma "ES"
         // Cuando   solicito los significados de la palabra "manzana"
         Optional<List<String>> respuesta = diccionario.getSignificados("manzana");
@@ -54,8 +64,9 @@ public class DiccionarioTest {
     }
 
     @Test
+    @DisplayName("Recuperar los significados de una palabra que existe")
     // Escenario: Recuperar los significados de una palabra que existe
-    public void significadosDeOtraPalabraQueExisteConMuchosSignificados() {
+    void significadosDeOtraPalabraQueExisteConMuchosSignificados() {
         // Dado     que tengo un diccionario de idioma "ES"
         // Cuando   solicito los significados de la palabra "melón"
         Optional<List<String>> respuesta = diccionario.getSignificados("melón");
@@ -69,8 +80,9 @@ public class DiccionarioTest {
     }
 
     @Test
+    @DisplayName("Recuperar los significados de una palabra que no existe")
     // Escenario: Recuperar los significados de una palabra que no existe
-    public void recuperarSignificadosDeUnaPalabraQueNoExiste() {
+    void recuperarSignificadosDeUnaPalabraQueNoExiste() {
         // Dado     que tengo un diccionario de idioma "ES"
         // Cuando   solicito los significados de la palabra "archilococo"
         Optional<List<String>> respuesta = diccionario.getSignificados("archilococo");
