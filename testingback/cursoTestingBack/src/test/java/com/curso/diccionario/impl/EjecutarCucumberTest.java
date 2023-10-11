@@ -15,5 +15,13 @@ import static io.cucumber.core.options.Constants.GLUE_PROPERTY_NAME;
 @SelectClasspathResource("features")
 // Le indicamos a JUNIT que le indique a cucumber en que paquete están los ficheros de steps
 @ConfigurationParameter( key = GLUE_PROPERTY_NAME, value = "com.curso.diccionario.impl")
+
+// Si estoy con JUnit 4
+//  @RunWith(Cucumber.class)
+//  @CucumberOptions(
+//          features = "classpath:features",
+//          glue = "com.curso.diccionario.impl",
+//          plugin = {"pretty", "html:target/cucumber-reports"}
+//  )
 public class EjecutarCucumberTest {
 }

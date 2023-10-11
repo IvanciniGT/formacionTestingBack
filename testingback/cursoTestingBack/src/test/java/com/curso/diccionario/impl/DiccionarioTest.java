@@ -2,6 +2,11 @@ package com.curso.diccionario.impl;
 
 import com.curso.diccionario.Diccionario;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 //import org.junit.BeforeClass;
 //import org.junit.Test;
 
@@ -38,29 +43,34 @@ class DiccionarioTest {
         assertTrue(respuesta);
     }
 
-    @Test
-    @DisplayName("Preguntar por una palabra que existe")
+    @ParameterizedTest // Es de la librería params de JUNIT
+    @ValueSource(strings = {"archilococo", "estringolococo"})
+    @DisplayName("Preguntar por una palabra que no existe")
     // Escenario: Preguntar por una palabra que no existe
-    void preguntarPorPalabraQueNoExiste() {
+    void preguntarPorPalabraQueNoExiste( String palabra ) {
         // Dado     que tengo un diccionario de idioma "ES"
         // Cuando   pregunto por la palabra "archilococo"
-        boolean respuesta = diccionario.existe("archilococo");
+        boolean respuesta = diccionario.existe(palabra);
         // Entonces me responde que no existe
         assertFalse(respuesta);
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("Recuperar los significados de una palabra que existe")
+    //@CsvSource({"manzana, 1, Fruto del manzano", "melón, 2, Fruto del melonero"})
+    @CsvFileSource(resources = "/significados.csv", numLinesToSkip = 1)
     // Escenario: Recuperar los significados de una palabra que existe
-    void significadosDeUnaPalabraQueExisteConUnSignificado() {
+    void significadosDeUnaPalabraQueExisteConUnSignificado(String palabra, int numeroDeSignificados, String primerSignificado, String segundoSignificado) {
         // Dado     que tengo un diccionario de idioma "ES"
         // Cuando   solicito los significados de la palabra "manzana"
-        Optional<List<String>> respuesta = diccionario.getSignificados("manzana");
+        Optional<List<String>> respuesta = diccionario.getSignificados(palabra);
         // Entonces me devuelve 1 significado
         assertTrue(respuesta.isPresent());
-        assertEquals(1, respuesta.get().size());
+        assertEquals(numeroDeSignificados, respuesta.get().size());
         // Y        el significado número 1 es "Fruto del manzano"
-        assertEquals("Fruto del manzano", respuesta.get().get(0));
+        assertEquals(primerSignificado, respuesta.get().get(0));
+        if(numeroDeSignificados>1)
+            assertEquals(segundoSignificado, respuesta.get().get(1));
     }
 
     @Test
