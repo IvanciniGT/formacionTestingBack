@@ -30,11 +30,25 @@
             <version>4.13.2</version>
             <scope>test</scope>
         -->
-        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+        <!-- Cucumber -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
             <version>7.14.0</version>
+        </dependency>
+        <!-- Me permite llamar a cucumber desde JUNIT platform -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
+            <version>7.14.0</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Me permite crear suites de pruebas con JUNIT ejecutadas a través de otras herramientas / Frameworks de pruebas -->
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite</artifactId>
+            <version>1.10.0</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
