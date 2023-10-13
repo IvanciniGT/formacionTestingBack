@@ -1,3 +1,0 @@
-manzana=Fruto del manzano
-melón=Fruto del melonero|Persona con pocas luces
-melocotón=Fruto del melocotonero
