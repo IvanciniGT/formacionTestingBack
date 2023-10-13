@@ -8,6 +8,12 @@
     <artifactId>cursoTestingBack</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <packaging>pom</packaging>
+    <modules>
+        <module>introduccion-pruebas</module>
+        <module>mascotas-repositorio</module>
+    </modules>
+
     <!-- Dando valores a variables... Variables que usaremos nosotros... o variables que son usadas por los plugins que tiene maven -->
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
